@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>threejs</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .navbar {
+      display: block;
+      position: absolute;
+
+
+    }
+
+    span {
+      position: absolute;
+      color: white;
+            top: 15px;
+            left: 15px;
+
+    }
+
+    .list {
+      display: block;
+      position: absolute;
+      bottom: 0px;
+      list-style: none;
+      color: white;
+    }
+
+
+    a {
+      text-decoration: none;
+      position: absolute;
+      color: white;
+    }
+
+    a:hover {
+      color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbar"><span>Three.js Tutorial</span></div>
+  <script src="https://threejs.org/build/three.min.js"></script>
+  <script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight);
+
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshBasicMaterial({
+      color: 0xffff00
+    });
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    cube.position.z = -5;
+    cube.rotation.x = 10;
+    cube.rotation.y = 5;
+
+    // renderer.render(scene,camera);
+
+    var animate = function () {
+      cube.rotation.x += 0.01;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+  <div class="list">
+    <ul>
+      <li><a href="portal.html">PORTAL</a></li>
+      <li><a href="typo.html">TYPO</a></li>
+    </ul>
+  </div>
+
+</body>
+
+</html>
