@@ -1,8 +1,8 @@
-import * as THREE from 'https://threejs.org/build/three.module.js';
+import * as THREE from './three/build/three.module.js';
 
 import {
   OBJLoader
-} from 'https://threejs.org/examples/jsm/loaders/OBJLoader.js';
+} from './three/examples/jsm/loaders/OBJLoader.js';
 let container;
 let camera, scene, renderer;
 
