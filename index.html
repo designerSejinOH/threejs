@@ -2,97 +2,49 @@
 <html lang="en">
 
 <head>
+  <script src="js/three/build/three.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>threejs</title>
   <style>
     html,
     body {
-      margin: 0;
-      padding: 0;
+   margin: 0 auto;
+   padding: 0 auto;
     }
-
-    canvas {
-      display: block;
+    div{
+position: absolute; 
+top: 50%; 
+left: 50%; 
+transform: translate(-50%, -50%);
     }
-
-    .navbar {
-      display: block;
-      position: absolute;
-
-
-    }
-
-    span {
-      position: absolute;
-      color: white;
-            top: 15px;
-            left: 15px;
-
-    }
-
-    .list {
-      display: block;
-      position: absolute;
-      bottom: 0px;
-      list-style: none;
-      color: white;
-    }
-
-
-    a {
+    a{
       text-decoration: none;
-      position: absolute;
-      color: white;
+      color: black;
+      font-size: 100px;
     }
-
-    a:hover {
-      color: yellow;
+    a:hover{
+      color:aliceblue;
     }
   </style>
+
 </head>
 
 <body>
-  <div id="navbar"><span>Three.js Tutorial</span></div>
-  <script src="https://threejs.org/build/three.min.js"></script>
-  <script>
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight);
-
-    var renderer = new THREE.WebGLRenderer({
-      antialias: true
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({
-      color: 0xffff00
-    });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    cube.position.z = -5;
-    cube.rotation.x = 10;
-    cube.rotation.y = 5;
-
-    // renderer.render(scene,camera);
-
-    var animate = function () {
-      cube.rotation.x += 0.01;
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    animate();
-  </script>
-  <div class="list">
-    <ul>
-      <li><a href="portal.html">PORTAL</a></li>
-      <li><a href="typo.html">TYPO</a></li>
-    </ul>
+<!-- 
+  //gravity_test
+  <div>
+<a href="index.html">GRAVITY</a>
   </div>
+  <script src="js/gravity_test.js" type="module">
+  </script> -->
 
+  <!-- objloader_test -->
+  <div>
+<a href="index.html">OBJ LOADER</a>
+  </div>
+  <script src="js/obj_loader.js" type="module">
+  </script>
 </body>
 
 </html>
