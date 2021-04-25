@@ -1,5 +1,6 @@
 {
     "asset" : {
+        "copyright" : "designersjinoh",
         "generator" : "Khronos glTF Blender I/O v1.5.17",
         "version" : "2.0"
     },
@@ -37,8 +38,13 @@
                 1,
                 7.360657860999709e-08
             ],
+            "scale" : [
+                0.32544422149658203,
+                0.32544422149658203,
+                0.32544422149658203
+            ],
             "translation" : [
-                6.791904926300049,
+                2.2535111904144287,
                 0,
                 0
             ]
@@ -46,17 +52,17 @@
     ],
     "materials" : [
         {
+            "alphaMode" : "BLEND",
             "doubleSided" : true,
-            "name" : "camera inner ring",
+            "name" : "camera glass",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0,
-                    0.08240000158548355,
-                    0.3019999861717224,
+                    0,
+                    0,
                     1
                 ],
-                "metallicFactor" : 0,
-                "roughnessFactor" : 0.6121283173561096
+                "roughnessFactor" : 0
             }
         },
         {
@@ -66,12 +72,6 @@
                 "metallicFactor" : 0.550000011920929,
                 "roughnessFactor" : 0.06818182021379471
             }
-        },
-        {
-            "alphaMode" : "BLEND",
-            "doubleSided" : true,
-            "name" : "camera glass",
-            "pbrMetallicRoughness" : {}
         },
         {
             "doubleSided" : true,
@@ -91,7 +91,16 @@
             "alphaMode" : "BLEND",
             "doubleSided" : true,
             "name" : "bottom glass",
-            "pbrMetallicRoughness" : {}
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0,
+                    0,
+                    0,
+                    1
+                ],
+                "metallicFactor" : 0.5882353186607361,
+                "roughnessFactor" : 0.19230768084526062
+            }
         },
         {
             "doubleSided" : true,
@@ -225,7 +234,7 @@
                         "TEXCOORD_0" : 10
                     },
                     "indices" : 11,
-                    "material" : 2
+                    "material" : 0
                 },
                 {
                     "attributes" : {
@@ -234,7 +243,7 @@
                         "TEXCOORD_0" : 14
                     },
                     "indices" : 15,
-                    "material" : 3
+                    "material" : 2
                 },
                 {
                     "attributes" : {
@@ -243,7 +252,7 @@
                         "TEXCOORD_0" : 18
                     },
                     "indices" : 19,
-                    "material" : 4
+                    "material" : 3
                 },
                 {
                     "attributes" : {
@@ -252,7 +261,7 @@
                         "TEXCOORD_0" : 22
                     },
                     "indices" : 23,
-                    "material" : 5
+                    "material" : 4
                 },
                 {
                     "attributes" : {
@@ -261,7 +270,7 @@
                         "TEXCOORD_0" : 26
                     },
                     "indices" : 27,
-                    "material" : 6
+                    "material" : 5
                 },
                 {
                     "attributes" : {
@@ -270,7 +279,7 @@
                         "TEXCOORD_0" : 30
                     },
                     "indices" : 31,
-                    "material" : 7
+                    "material" : 6
                 },
                 {
                     "attributes" : {
@@ -279,7 +288,7 @@
                         "TEXCOORD_0" : 34
                     },
                     "indices" : 35,
-                    "material" : 8
+                    "material" : 7
                 },
                 {
                     "attributes" : {
@@ -288,7 +297,7 @@
                         "TEXCOORD_0" : 38
                     },
                     "indices" : 39,
-                    "material" : 9
+                    "material" : 8
                 },
                 {
                     "attributes" : {
@@ -297,7 +306,7 @@
                         "TEXCOORD_0" : 42
                     },
                     "indices" : 43,
-                    "material" : 10
+                    "material" : 9
                 },
                 {
                     "attributes" : {
@@ -306,7 +315,7 @@
                         "TEXCOORD_0" : 46
                     },
                     "indices" : 47,
-                    "material" : 11
+                    "material" : 10
                 }
             ]
         }

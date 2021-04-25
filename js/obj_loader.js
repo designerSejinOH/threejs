@@ -1,12 +1,13 @@
 import * as THREE from './three/build/three.module.js';
+
 import {
-	OBJLoader
+  OBJLoader
 } from './three/examples/jsm/loaders/OBJLoader.js';
 let container;
 let camera, scene, renderer;
 
 let mouseX = 0,
-	mouseY = 0;
+  mouseY = 0;
 
 let windowHalfX = window.innerWidth / 2;
 let windowHalfY = window.innerHeight / 2;
@@ -19,105 +20,103 @@ animate();
 
 function init() {
 
-	container = document.createElement('div');
-	document.body.appendChild(container);
+  		container = document.createElement( 'div' );
+				document.body.appendChild( container );
 
-	camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-	camera.position.z = 250;
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.z = 250;
 
-	// scene
+  // scene
 
-	scene = new THREE.Scene();
+  scene = new THREE.Scene();
 
-	const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
-	scene.add(ambientLight);
+  const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+  scene.add(ambientLight);
 
-	const pointLight = new THREE.PointLight(0xffffff, 0.8);
-	camera.add(pointLight);
-	scene.add(camera);
+  const pointLight = new THREE.PointLight(0xffffff, 0.8);
+  camera.add(pointLight);
+  scene.add(camera);
 
-	// manager
+  // manager
 
-	function loadModel() {
+  function loadModel() {
 
-		object.traverse(function (child) {
+    object.traverse(function (child) {
 
-			if (child.isMesh) child.material.map = texture;
+      if (child.isMesh) child.material.map = texture;
 
-		});
+    });
 
-		object.position.y = -95;
-		scene.add(object);
+    object.position.y = -95;
+    scene.add(object);
 
-	}
+  }
 
-	const manager = new THREE.LoadingManager(loadModel);
+  const manager = new THREE.LoadingManager(loadModel);
 
-	manager.onProgress = function (item, loaded, total) {
+  manager.onProgress = function (item, loaded, total) {
 
-		console.log(item, loaded, total);
+    console.log(item, loaded, total);
 
-	};
-	// texture
-	const textureLoader = new THREE.TextureLoader(manager);
-	const texture = textureLoader.load('data/grasslight-big.jpg');
+  };
+// texture
 
-	// model
+				const textureLoader = new THREE.TextureLoader( manager );
+				const texture = textureLoader.load( '../data/grasslight-big.jpg' );
 
-	function onProgress(xhr) {
+  // model
 
-		if (xhr.lengthComputable) {
+  function onProgress(xhr) {
 
-			const percentComplete = xhr.loaded / xhr.total * 100;
-			console.log('model ' + Math.round(percentComplete, 2) + '% downloaded');
+    if (xhr.lengthComputable) {
 
-		}
+      const percentComplete = xhr.loaded / xhr.total * 100;
+      console.log('model ' + Math.round(percentComplete, 2) + '% downloaded');
 
-	}
+    }
 
-	function onError() {}
+  }
 
-	const loader = new OBJLoader(manager);
-	loader.load('data/iphone12mini_sejin.obj', function (obj) {
+  function onError() {}
 
-		object = obj;
+  const loader = new OBJLoader(manager);
+  loader.load('../data/iphone12mini_sejin.obj', function (obj) {
 
-	}, onProgress, onError);
+    object = obj;
 
-	//
+  }, onProgress, onError);
 
-	renderer = new THREE.WebGLRenderer({
-		alpha: true,
-		antialias: true
-	});
-	renderer.setPixelRatio(window.devicePixelRatio);
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	container.appendChild(renderer.domElement);
+  //
 
-	document.addEventListener('mousemove', onDocumentMouseMove);
+  renderer = new THREE.WebGLRenderer();
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
 
-	//
+  document.addEventListener('mousemove', onDocumentMouseMove);
 
-	window.addEventListener('resize', onWindowResize);
+  //
+
+  window.addEventListener('resize', onWindowResize);
 
 }
 
 function onWindowResize() {
 
-	windowHalfX = window.innerWidth / 2;
-	windowHalfY = window.innerHeight / 2;
+  windowHalfX = window.innerWidth / 2;
+  windowHalfY = window.innerHeight / 2;
 
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
 
-	renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
 
 function onDocumentMouseMove(event) {
 
-	mouseX = (event.clientX - windowHalfX) / 2;
-	mouseY = (event.clientY - windowHalfY) / 2;
+  mouseX = (event.clientX - windowHalfX) / 2;
+  mouseY = (event.clientY - windowHalfY) / 2;
 
 }
 
@@ -125,18 +124,18 @@ function onDocumentMouseMove(event) {
 
 function animate() {
 
-	requestAnimationFrame(animate);
-	render();
+  requestAnimationFrame(animate);
+  render();
 
 }
 
 function render() {
 
-	camera.position.x += (mouseX - camera.position.x) * .05;
-	camera.position.y += (-mouseY - camera.position.y) * .05;
+  camera.position.x += (mouseX - camera.position.x) * .05;
+  camera.position.y += (-mouseY - camera.position.y) * .05;
 
-	camera.lookAt(scene.position);
+  camera.lookAt(scene.position);
 
-	renderer.render(scene, camera);
+  renderer.render(scene, camera);
 
 }
