@@ -7,31 +7,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>threejs</title>
   <style>
-    html,
     body {
-   margin: 0 auto;
-   padding: 0 auto;
+      margin: 0;
+	background-color: #fff;
+	color: #fff;
+	font-family: Monospace;
+	font-size: 13px;
+	line-height: 24px;
+	overscroll-behavior: none;
     }
-    div{
-position: absolute; 
-top: 50%; 
-left: 50%; 
-transform: translate(-50%, -50%);
+
+    div {
+            z-index: 0;
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
-    a{
+
+    a {
+      z-index: 1;
+       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      	font-family:Arial, Helvetica, sans-serif;
+        font-weight: bold;
+
       text-decoration: none;
       color: black;
-      font-size: 100px;
+      font-size: 50px;
     }
-    a:hover{
-      color:aliceblue;
+span{
+  font-size: 20px;
+}
+    a:hover {
+      color: white;
     }
   </style>
 
 </head>
 
 <body>
-<!-- 
+  <!-- 
   //gravity_test
   <div>
 <a href="index.html">GRAVITY</a>
@@ -40,8 +59,8 @@ transform: translate(-50%, -50%);
   </script> -->
 
   <!-- objloader_test -->
+      <a href="index.html">iPhone 12 mini <br> <span>GLASS Collection</span> </a>
   <div>
-<a href="index.html">OBJ LOADER</a>
   </div>
   <script src="js/obj_loader.js" type="module">
   </script>
