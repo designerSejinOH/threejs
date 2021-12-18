@@ -41,7 +41,7 @@ import * as THREE from './three/build/three.module.js';
 						const roughnessMipmapper = new RoughnessMipmapper( renderer );
 
 						const loader = new GLTFLoader().setPath( 'data/' );
-						loader.load( 'iphone12mini_sejin.gltf', function ( gltf ) {
+						loader.load( 'cake.gltf', function ( gltf ) {
 
 							gltf.scene.traverse( function ( child ) {
 
@@ -53,7 +53,7 @@ import * as THREE from './three/build/three.module.js';
 								}
 
 							} );
-              gltf.scene.position.y = -5;
+              gltf.scene.position.y = 0;
 							scene.add( gltf.scene );
 
 							roughnessMipmapper.dispose();

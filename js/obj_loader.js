@@ -24,16 +24,16 @@ function init() {
 				document.body.appendChild( container );
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-  camera.position.z = 250;
+  camera.position.z = 50;
 
   // scene
 
   scene = new THREE.Scene();
 
-  const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
+  const ambientLight = new THREE.AmbientLight(0xcccccc, 0.9);
   scene.add(ambientLight);
 
-  const pointLight = new THREE.PointLight(0xffffff, 0.8);
+  const pointLight = new THREE.PointLight(0xffffff, 0.9);
   camera.add(pointLight);
   scene.add(camera);
 
@@ -47,7 +47,7 @@ function init() {
 
     });
 
-    object.position.y = -95;
+    object.scale.set(5,5,5);
     scene.add(object);
 
   }
@@ -62,7 +62,7 @@ function init() {
 // texture
 
 				const textureLoader = new THREE.TextureLoader( manager );
-				const texture = textureLoader.load( '../data/grasslight-big.jpg' );
+				const texture = textureLoader.load( '../data/PaintedMetal02_4K_BaseColor.png' );
 
   // model
 
@@ -80,7 +80,7 @@ function init() {
   function onError() {}
 
   const loader = new OBJLoader(manager);
-  loader.load('../data/iphone12mini_sejin.obj', function (obj) {
+  loader.load('../data/cake.obj', function (obj) {
 
     object = obj;
 
@@ -131,8 +131,8 @@ function animate() {
 
 function render() {
 
-  camera.position.x += (mouseX - camera.position.x) * .05;
-  camera.position.y += (-mouseY - camera.position.y) * .05;
+  camera.position.x += (mouseX - camera.position.x) * .005;
+  camera.position.y += (-mouseY - camera.position.y) * .005;
 
   camera.lookAt(scene.position);
 
