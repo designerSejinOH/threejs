@@ -24,7 +24,7 @@ function init() {
 				document.body.appendChild( container );
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-  camera.position.z = 50;
+  camera.position.z = 40;
 
   // scene
 
@@ -46,8 +46,8 @@ function init() {
       if (child.isMesh) child.material.map = texture;
 
     });
-
-    object.scale.set(5,5,5);
+    object.position.y= -5;
+    object.scale.set(2,2,2);
     scene.add(object);
 
   }
@@ -88,7 +88,8 @@ function init() {
 
   //
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setClearColor(0x000000, 0); // the default
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   container.appendChild(renderer.domElement);
@@ -115,8 +116,8 @@ function onWindowResize() {
 
 function onDocumentMouseMove(event) {
 
-  mouseX = (event.clientX - windowHalfX) / 2;
-  mouseY = (event.clientY - windowHalfY) / 2;
+  mouseX = (event.clientX - windowHalfX) / 1.5;
+  mouseY = (event.clientY - windowHalfY) / 1.5;
 
 }
 
@@ -131,8 +132,8 @@ function animate() {
 
 function render() {
 
-  camera.position.x += (mouseX - camera.position.x) * .005;
-  camera.position.y += (-mouseY - camera.position.y) * .005;
+  camera.position.x += (mouseX - camera.position.x) * .0025;
+  camera.position.y += (-mouseY - camera.position.y) * .0025;
 
   camera.lookAt(scene.position);
 
