@@ -20,8 +20,8 @@ animate();
 
 function init() {
 
-  		container = document.createElement( 'div' );
-				document.body.appendChild( container );
+  container = document.createElement('div');
+  document.body.appendChild(container);
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.z = 40;
@@ -46,8 +46,9 @@ function init() {
       if (child.isMesh) child.material.map = texture;
 
     });
-    object.position.y= -5;
-    object.scale.set(2,2,2);
+
+    object.position.y = -5;
+    object.scale.set(2, 2, 2);
     scene.add(object);
 
   }
@@ -59,10 +60,10 @@ function init() {
     console.log(item, loaded, total);
 
   };
-// texture
+  // texture
 
-				const textureLoader = new THREE.TextureLoader( manager );
-				const texture = textureLoader.load( '../data/PaintedMetal02_4K_BaseColor.png' );
+  const textureLoader = new THREE.TextureLoader(manager);
+  const texture = textureLoader.load('../data/PaintedMetal02_4K_BaseColor.png');
 
   // model
 
@@ -88,7 +89,9 @@ function init() {
 
   //
 
-  renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer = new THREE.WebGLRenderer({
+    alpha: true
+  });
   renderer.setClearColor(0x000000, 0); // the default
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
