@@ -63,7 +63,7 @@ function init() {
   // texture
 
   const textureLoader = new THREE.TextureLoader(manager);
-  const texture = textureLoader.load('../data/PaintedMetal02_4K_BaseColor.png');
+  const texture = textureLoader.load('./data/PaintedMetal02_4K_BaseColor.png');
 
   // model
 
@@ -81,7 +81,7 @@ function init() {
   function onError() {}
 
   const loader = new OBJLoader(manager);
-  loader.load('../data/cake.obj', function (obj) {
+  loader.load('./data/cake.obj', function (obj) {
 
     object = obj;
 
