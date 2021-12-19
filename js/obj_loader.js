@@ -48,7 +48,7 @@ function init() {
     });
 
     object.position.y = -5;
-    object.scale.set(2, 2, 2);
+    object.scale.set(2.5, 2.5, 2.5);
     scene.add(object);
 
   }
@@ -63,7 +63,7 @@ function init() {
   // texture
 
   const textureLoader = new THREE.TextureLoader(manager);
-  const texture = textureLoader.load('../data/PaintedMetal02_4K_BaseColor.png');
+  const texture = textureLoader.load('./data/PaintedMetal02_4K_BaseColor.png');
 
   // model
 
@@ -81,7 +81,7 @@ function init() {
   function onError() {}
 
   const loader = new OBJLoader(manager);
-  loader.load('../data/cake.obj', function (obj) {
+  loader.load('./data/cake.obj', function (obj) {
 
     object = obj;
 
@@ -119,8 +119,8 @@ function onWindowResize() {
 
 function onDocumentMouseMove(event) {
 
-  mouseX = (event.clientX - windowHalfX) / 1.5;
-  mouseY = (event.clientY - windowHalfY) / 1.5;
+  mouseX = (event.clientX - windowHalfX) / 2;
+  mouseY = (event.clientY - windowHalfY) / 2;
 
 }
 
@@ -135,8 +135,8 @@ function animate() {
 
 function render() {
 
-  camera.position.x += (mouseX - camera.position.x) * .0025;
-  camera.position.y += (-mouseY - camera.position.y) * .0025;
+  camera.position.x += (mouseX - camera.position.x) * .005;
+  camera.position.y += (-mouseY - camera.position.y) * .005;
 
   camera.lookAt(scene.position);
 
