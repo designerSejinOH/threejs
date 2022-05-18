@@ -9,7 +9,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
  * Base
  */
 // Debug
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -18,36 +18,41 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 /**
- * Floor
+ * Textures
  */
-const floor = new THREE.Mesh(
-  new THREE.PlaneGeometry(10, 10),
-  new THREE.MeshStandardMaterial({
-    color: "#777",
-    metalness: 0,
-    roughness: 0.5,
-  })
-);
-floor.receiveShadow = true;
-floor.rotation.x = -Math.PI * 0.5;
-scene.add(floor);
+const textureLoader = new THREE.TextureLoader();
+const particleTexture = textureLoader.load("/textures/particles/3.png");
 
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+const ambientLight = new THREE.AmbientLight();
+ambientLight.color = new THREE.Color(0xffffff);
+ambientLight.intensity = 0.5;
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-directionalLight.castShadow = true;
-directionalLight.shadow.mapSize.set(1024, 1024);
-directionalLight.shadow.camera.far = 15;
-directionalLight.shadow.camera.left = -7;
-directionalLight.shadow.camera.top = 7;
-directionalLight.shadow.camera.right = 7;
-directionalLight.shadow.camera.bottom = -7;
-directionalLight.position.set(5, 5, 5);
+const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+pointLight.position.set(50, 50, 50);
+scene.add(pointLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 scene.add(directionalLight);
+
+directionalLight.castShadow = true;
+
+const spotLight = new THREE.SpotLight(0xffffff);
+spotLight.position.set(100, 1000, 100);
+
+spotLight.castShadow = true;
+
+spotLight.shadow.mapSize.width = 1024;
+spotLight.shadow.mapSize.height = 1024;
+
+spotLight.shadow.camera.near = 500;
+spotLight.shadow.camera.far = 4000;
+spotLight.shadow.camera.fov = 30;
+
+scene.add(spotLight);
 
 /**
  * Models
@@ -57,34 +62,56 @@ dracoLoader.setDecoderPath("/draco/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
+gltfLoader.load("/models/glTF_Binary/ex.glb", (gltf) => {
+  const land = gltf.scene;
+  console.log(land);
 
-// let mixer = null;
-
-gltfLoader.load("/models/Map.glb", (gltf) => {
-  console.log(gltf.scene);
-  //   mixer = new THREE.AnimationMixer(gltf.scene);
-  //   const action = mixer.clipAction(gltf.animations[2]);
-
-  //   action.play();
-  gltf.scene.position.set(0.0, 0.0, 0.0);
-  gltf.scene.scale.set(0.025, 0.025, 0.025);
-  scene.add(gltf.scene);
-  (gltf) => {
-    //   console.log("success");
-    alert("success");
-    console.log(gltf);
-  },
-    (progress) => {
-      //   console.log("progress");
-      alert("downloading");
-      //   console.log(progress);
-    },
-    (error) => {
-      // console.log("error");
-      alert("error");
-      //   console.log(error);
-    };
+  land.position.set(0.0, -5.0, 0.0);
+  land.receiveShadow = true;
+  scene.add(land);
 });
+
+/**
+ * Particles
+ */
+// Geometry
+const particlesGeometry = new THREE.BufferGeometry();
+const count = 10000;
+
+const positions = new Float32Array(count * 3);
+const colors = new Float32Array(count * 3);
+
+for (let i = 0; i < count * 3; i++) {
+  positions[i] = (Math.random() - 0.5) * 20;
+  colors[i] = Math.random();
+}
+
+particlesGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positions, 3)
+);
+particlesGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+// Material
+const particlesMaterial = new THREE.PointsMaterial();
+
+particlesMaterial.size = 0.1;
+particlesMaterial.sizeAttenuation = true;
+
+particlesMaterial.color = new THREE.Color("#ff88cc");
+
+particlesMaterial.transparent = true;
+particlesMaterial.alphaMap = particleTexture;
+// particlesMaterial.alphaTest = 0.01
+// particlesMaterial.depthTest = false
+particlesMaterial.depthWrite = false;
+particlesMaterial.blending = THREE.AdditiveBlending;
+
+particlesMaterial.vertexColors = true;
+
+// Points
+const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+scene.add(particles);
 
 /**
  * Sizes
@@ -118,12 +145,12 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   10000
 );
-camera.position.set(300, 300, 300);
+camera.position.set(15, -3.0, -0.1);
 scene.add(camera);
 
 // Controls
 const controls = new OrbitControls(camera, canvas);
-controls.target.set(0, 0.75, 0);
+controls.target.set(0.0, -5.0, 0.0);
 controls.enableDamping = true;
 
 /**
@@ -131,9 +158,11 @@ controls.enableDamping = true;
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  alpha: true,
 });
+renderer.setClearColor(0x000000, 0); // the default
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+// renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -147,11 +176,6 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
   const deltaTime = elapsedTime - previousTime;
   previousTime = elapsedTime;
-
-  //update Mixer
-  //   if (mixer !== null) {
-  //     mixer.update(deltaTime);
-  //   }
 
   // Update controls
   controls.update();

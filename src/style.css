@@ -1,19 +1,49 @@
-*
-{
-    margin: 0;
-    padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=Macondo&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  transition: 0.5s;
 }
 
 html,
-body
-{
-    overflow: hidden;
+body {
+  overflow: hidden;
+  font-family: "Macondo", cursive;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
+div:hover {
+  color: brown;
+}
+
+.rhead {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 20px;
+  z-index: 999;
+}
+
+.lhead {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px;
+  text-align: right;
+  z-index: 999;
+}
+
+.bParagraph {
+  position: absolute;
+  bottom: 0;
+  margin: 20px;
+  padding: 10px;
+  z-index: 999;
 }
