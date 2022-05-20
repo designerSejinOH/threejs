@@ -1,20 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>23 - Imported models</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rapa Nui</title>
+    <style>
+      #loading {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* top:50%;
+        left:50%;
+        transform: translate(-50%,-50%); */
+        background-color: rgba(255, 255, 255, 0.5);
+        z-index: 999999;
+        color:black;
+      }
+      .loadbox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px;
+        width: 50px;
+        height: 50px;
+      }
+
+      img {
+        width: 70%;
+      }
+
+      .land {
+        position: absolute;
+        z-index: 1;
+        animation: loading1 1s ease-in-out infinite;
+      }
+      .sea {
+        position: absolute;
+        z-index: 2;
+        animation: loading2 1s ease-in-out infinite;
+      }
+
+      @keyframes loading1 {
+        0% {
+          transform: rotate(0deg);
+          transform-origin: 50% 50%;
+        }
+
+        100% {
+          transform: rotate(360deg);
+          transform-origin: 50% 50%;
+        }
+      }
+
+      @keyframes loading2 {
+        0% {
+          transform: rotate(0deg);
+          transform-origin: 50% 50%;
+        }
+
+        100% {
+          transform: rotate(-360deg);
+          transform-origin: 50% 50%;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="rhead">
-    <h1>Rapa Nui</h1>
+      <h1>Myth Land</h1>
     </div>
     <div class="lhead">
-        <h3>Myth Land <br> Unknown Univese</h3>
+      <h3>Unknown Univese</h3>
     </div>
     <div class="bParagraph">
-            <p>Easter Island is one of the most remote inhabited islands in the world.[8] The nearest inhabited land (around 50 residents in 2013) is Pitcairn Island, 2,075 kilometres (1,289 mi) away;[9] the nearest town with a population over 500 is Rikitea, on the island of Mangareva, 2,606 km (1,619 mi) away; the nearest continental point lies in central Chile, 3,512 km (2,182 mi) away.</p>
+      <p>
+        Easter Island is one of the most remote inhabited islands in the
+        world.[8] The nearest inhabited land (around 50 residents in 2013) is
+        Pitcairn Island, 2,075 kilometres (1,289 mi) away;[9] the nearest town
+        with a population over 500 is Rikitea, on the island of Mangareva, 2,606
+        km (1,619 mi) away; the nearest continental point lies in central Chile,
+        3,512 km (2,182 mi) away.
+      </p>
     </div>
+    <div id="loading">
+      <a href="#" class="loading">
+        <div class="loadbox">
+          <p>traveling...</p>
+          <br />
+          <img class="land" src="./images/land-2.png" alt="" />
+          <img class="sea" src="./images/sea-2.png" alt="" />
+        </div>
+      </a>
+    </div>
+
     <canvas class="webgl"></canvas>
-</body>
+  </body>
 </html>

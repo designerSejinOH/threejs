@@ -5,6 +5,7 @@ import * as dat from "lil-gui";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 
+const loading = document.getElementById("loading");
 /**
  * Base
  */
@@ -35,13 +36,13 @@ const pointLight = new THREE.PointLight(0xffffff, 1, 100);
 pointLight.position.set(50, 50, 50);
 scene.add(pointLight);
 
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
 scene.add(directionalLight);
 
 directionalLight.castShadow = true;
 
 const spotLight = new THREE.SpotLight(0xffffff);
-spotLight.position.set(100, 1000, 100);
+spotLight.position.set(10, 100, 100);
 
 spotLight.castShadow = true;
 
@@ -62,14 +63,29 @@ dracoLoader.setDecoderPath("/draco/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
-gltfLoader.load("/models/glTF_Binary/ex.glb", (gltf) => {
-  const land = gltf.scene;
-  console.log(land);
-
-  land.position.set(0.0, -5.0, 0.0);
-  land.receiveShadow = true;
-  scene.add(land);
-});
+gltfLoader.load(
+  "/models/glTF_Binary/material.glb",
+  (gltf) => {
+    const land = gltf.scene;
+    console.log(land);
+    // land.scale.set(100, 100, 100);
+    land.position.set(5.0, -10.0, -1.7);
+    land.receiveShadow = true;
+    scene.add(land);
+    console.log("success");
+    console.log(gltf);
+    loading.style.display = "none";
+  },
+  (progress) => {
+    console.log("progress");
+    console.log(progress);
+    loading.style.display = "block";
+  },
+  (error) => {
+    console.log("error");
+    console.log(error);
+  }
+);
 
 /**
  * Particles
@@ -145,7 +161,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   10000
 );
-camera.position.set(15, -3.0, -0.1);
+camera.position.set(11, -3, 0.0);
 scene.add(camera);
 
 // Controls
@@ -179,7 +195,7 @@ const tick = () => {
 
   // Update controls
   controls.update();
-
+  console.log(camera.position);
   // Render
   renderer.render(scene, camera);
 
